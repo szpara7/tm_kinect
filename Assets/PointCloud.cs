@@ -8,47 +8,42 @@ public class PointCloud : MonoBehaviour
     public int maxDistance = 12;
     public DepthTexture drawer;
 
-    private float[,] pointsTab; 
-    private List<Vector3> pointList;
-   
+    private ushort[,] pointsTab; 
+    private int width;
+    private int height;   
 
     // Use this for initialization
     void Start()
     {
-       // pointList = new List<Vector3>();
-        pointsTab = new float[Camera.main.pixelWidth / rayAngle, Camera.main.pixelHeight / rayAngle];
+        width = Camera.main.pixelWidth / rayAngle;
+        height = Camera.main.pixelHeight / rayAngle;
+        pointsTab = new ushort[width, height];
     }
 
     // Update is called once per frame
     void Update()
     {  
         RaycastHit hit;
-       // pointList.Clear();
         
-        for (int i = 0, x = 0; x < pointsTab.GetLength(0); i += rayAngle, x++)
+        for (int i = 0, x = 0; x < width; i += rayAngle, x++)
         {
-            for (int j = 0, y = 0; y < pointsTab.GetLength(1) ; j += rayAngle, y++)
+            for (int j = 0, y = 0; y < height ; j += rayAngle, y++)
             {
-                pointsTab[x, y] = 0;
+                pointsTab[x, y] = ushort.MaxValue;                
                 Ray ray = Camera.main.ScreenPointToRay(new Vector3(i, j));
                 if (Physics.Raycast(ray, out hit, maxDistance))
                 {
-                    pointsTab[x,y] = hit.distance;
-                   // pointList.Add(hit.point);
+                    pointsTab[x, y] = (ushort)(hit.distance * ushort.MaxValue / maxDistance);
                 }
-            }
+            }            
+        }   
+        Debug.Log(pointsTab.GetLength(0));     
+        drawer.DrawDepthTexture(pointsTab);
+        if(Input.GetKeyDown(KeyCode.I))
+        {
+            PGMGenerator.SaveMap(pointsTab);
         }
-        drawer.DrawDepthTexture(pointsTab, maxDistance);
     }
-    // void OnDrawGizmos()
-    // {
-    //     Gizmos.color = Color.red;
-    //     if (pointList != null)
-    //     {
-    //         foreach (var i in pointList)
-    //         {
-    //             Gizmos.DrawSphere(i, 0.01f);
-    //         }
-    //     }
-    // }
 }
+
+
