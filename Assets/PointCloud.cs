@@ -37,7 +37,7 @@ public class PointCloud : MonoBehaviour
                 }
             }            
         }   
-        Debug.Log(pointsTab.GetLength(0));     
+       
         drawer.DrawDepthTexture(pointsTab);
         if(Input.GetKeyDown(KeyCode.I))
         {
