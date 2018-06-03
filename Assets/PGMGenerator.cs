@@ -4,8 +4,15 @@ using UnityEngine;
 using System.IO;
 using System;
 
+/// <summary>
+/// Class responsible for generates PGM file and save it
+/// </summary>
 public class PGMGenerator
 {
+    /// <summary>
+    /// Generate PGM file and save it
+    /// </summary>
+    /// <param name="pointsTab">Level of depth array</param>
     public static void SaveMap(ushort[,] pointsTab)
     {
         int width = pointsTab.GetLength(0);

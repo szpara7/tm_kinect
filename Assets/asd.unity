@@ -292,7 +292,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 19680cb8abf43c74fa228b26378f11ad, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  rayAngle: 5
+  rayAngle: 15
   maxDistance: 8
   drawer: {fileID: 73207509}
 --- !u!114 &73207508

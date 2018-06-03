@@ -3,9 +3,20 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
+/// <summary>
+/// Class responsible for draw depth texture
+/// </summary>
 public class DepthTexture : MonoBehaviour
 {
+	/// <summary>
+	/// Field specyfying image on the lower right area of the camera
+	/// </summary>
 	public RawImage image;
+
+	/// <summary>
+	/// Function which draw depth map  
+	/// </summary>
+	/// <param name="pointTab">Level of depth array</param>
 	public void DrawDepthTexture(ushort[,] pointTab)
 	{
 		int width = pointTab.GetLength(0);
