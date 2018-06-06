@@ -23,7 +23,7 @@ public class DepthTexture : MonoBehaviour
 		int height = pointTab.GetLength(1);
 		Texture2D texture = new Texture2D(width, height);
 		Color[] colorMap = new Color[width * height];
-
+		
 		for(int x = 0; x < width; x++)
 		{
 			for(int y = 0; y < height; y++)

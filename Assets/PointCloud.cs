@@ -38,7 +38,7 @@ public class PointCloud : MonoBehaviour
     private int height;
 
     /// <summary>
-    /// FUnction for initialization 
+    /// Initialization function 
     /// </summary>
     void Start()
     {
@@ -53,7 +53,6 @@ public class PointCloud : MonoBehaviour
     void Update()
     {
         RaycastHit hit;
-
         for (int i = 0, x = 0; x < width; i += rayAngle, x++)
         {
             for (int j = 0, y = 0; y < height; j += rayAngle, y++)
@@ -62,11 +61,12 @@ public class PointCloud : MonoBehaviour
                 Ray ray = Camera.main.ScreenPointToRay(new Vector3(i, j));
                 if (Physics.Raycast(ray, out hit, maxDistance))
                 {
-                    pointsTab[x, y] = (ushort)(hit.distance * ushort.MaxValue / maxDistance);
+                    float angle = Vector3.Angle(hit.transform.position - Camera.main.transform.position, Camera.main.transform.right);
+                    if (angle > 90) angle = 180 - angle;
+                    pointsTab[x, y] = (ushort)((hit.distance * System.Math.Sin((angle * Mathf.PI) / 180)) * ushort.MaxValue / maxDistance);
                 }
             }
         }
-
         drawer.DrawDepthTexture(pointsTab);
         if (Input.GetKeyDown(KeyCode.I))
         {
