@@ -1,1 +1,18 @@
+# Jun 6, 2018 
+* Fixed calculate distance to hit point
 
+# Jun 3, 2018 
+* Updated README.md file
+* Added "summary" doc in code
+* Code refactor
+
+#May 28, 2018
+* Updated .gitignore file
+* Added PGM generator class
+
+May 21, 2018
+* Added calculate distance to hit point and depth texture drawer
+
+# May 8, 2018 
+* Added Raycasting
+* Initial commit
